@@ -27,15 +27,12 @@ public class Account {
     public boolean withdrawal(int amount) {
         if (money.get() >= amount) {
             money.addAndGet(-amount);
-            logger.info("Withdrawn {} from account {}", amount, id);
             return true;
         }
-        logger.warn("Failed to withdraw {} from account {}: insufficient funds", amount, id);
         return false;
     }
 
     public void deposit(int amount) {
         money.addAndGet(amount);
-        logger.info("Deposited {} to account {}", amount, id);
     }
 }
