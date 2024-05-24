@@ -24,7 +24,7 @@ public class Account {
         return money;
     }
 
-    // Снимает указанную сумму со счета, если достаточно средств
+    // РЎРЅРёРјР°РµС‚ СѓРєР°Р·Р°РЅРЅСѓСЋ СЃСѓРјРјСѓ СЃРѕ СЃС‡РµС‚Р°, РµСЃР»Рё РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЃСЂРµРґСЃС‚РІ
     public boolean withdrawal(int amount) {
         if (money.get() >= amount) {
             money.addAndGet(-amount);
@@ -33,7 +33,7 @@ public class Account {
         return false;
     }
 
-    // Зачисляет указанную сумму на счет
+    // Р—Р°С‡РёСЃР»СЏРµС‚ СѓРєР°Р·Р°РЅРЅСѓСЋ СЃСѓРјРјСѓ РЅР° СЃС‡РµС‚
     public void deposit(int amount) {
         money.addAndGet(amount);
     }
