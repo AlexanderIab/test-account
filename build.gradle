@@ -2,6 +2,14 @@ plugins {
     id 'java'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.iablonski.testaccount.Main.java'
+        )
+    }
+}
+
 group = 'com.iablonski.testaccount'
 version = '1.0-SNAPSHOT'
 
