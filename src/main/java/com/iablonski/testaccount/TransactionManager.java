@@ -18,9 +18,11 @@ public class TransactionManager {
         this.transactionNumber = 1;
     }
 
+    // Метод для перевода средств между счетами
     public boolean transferMoney(Account transferFrom, Account transferTo, int amount) {
         lock.lock();
         try {
+            // Сохранение изначального баланса (до транзакции) для отката изменений
             int initialFromBalance = transferFrom.getMoney().get();
             int initialToBalance = transferTo.getMoney().get();
 
@@ -36,7 +38,10 @@ public class TransactionManager {
                     transactionNumber++;
                     return true;
                 } catch (Exception e){
-                    logger.error("Fatal error - {} during transaction from {} to {}. Rollback.", e.getMessage(), transferFrom.getId(), transferTo.getId());
+                    // Необязательное условие - если возникает критическая ошибка,
+                    // сумма на балансах становится изначальной (до транзакции)
+                    logger.error("Fatal error - {} during transaction from {} to {}. Rollback.",
+                            e.getMessage(), transferFrom.getId(), transferTo.getId());
                     transferFrom.getMoney().set(initialFromBalance);
                     transferTo.getMoney().set(initialToBalance);
                     return false;

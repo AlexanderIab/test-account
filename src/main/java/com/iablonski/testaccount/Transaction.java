@@ -12,10 +12,15 @@ public class Transaction implements Runnable {
     private final TransactionManager transactionManager;
     private final CountDownLatch countDownLatch;
 
+    private static final int MAX_SLEEP_TIME = 2000;
+    private static final int MIN_SLEEP_TIME = 1000;
+    private final int maxTransferAmount;
 
-    public Transaction(TransactionManager transactionManager, CountDownLatch countDownLatch) {
+
+    public Transaction(TransactionManager transactionManager, CountDownLatch countDownLatch, int maxTransferAmount) {
         this.transactionManager = transactionManager;
         this.countDownLatch = countDownLatch;
+        this.maxTransferAmount  = maxTransferAmount;
     }
 
     @Override
@@ -32,13 +37,13 @@ public class Transaction implements Runnable {
             Account accountFrom = accounts.get(indexAccountFrom);
             Account accountTo = accounts.get(indexAccountTo);
 
-            int amount = ThreadLocalRandom.current().nextInt(10000);
+            int amount = ThreadLocalRandom.current().nextInt(maxTransferAmount);
 
             if (transactionManager.transferMoney(accountFrom, accountTo, amount)) {
                 countDownLatch.countDown();
             }
             try {
-                Thread.sleep(1000 + ThreadLocalRandom.current().nextInt(1001));
+                Thread.sleep(ThreadLocalRandom.current().nextInt(MIN_SLEEP_TIME, MAX_SLEEP_TIME + 1));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 logger.error("Thread interrupted", e);

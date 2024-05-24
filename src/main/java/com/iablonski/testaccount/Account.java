@@ -24,6 +24,7 @@ public class Account {
         return money;
     }
 
+    // Снимает указанную сумму со счета, если достаточно средств
     public boolean withdrawal(int amount) {
         if (money.get() >= amount) {
             money.addAndGet(-amount);
@@ -32,6 +33,7 @@ public class Account {
         return false;
     }
 
+    // Зачисляет указанную сумму на счет
     public void deposit(int amount) {
         money.addAndGet(amount);
     }

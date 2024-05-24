@@ -29,21 +29,22 @@ public class Main {
         }
 
         int INITIAL_BALANCE = Integer.parseInt(prop.getProperty("INITIAL_BALANCE"));
-        int ACCOUNT_NUMBER = Integer.parseInt(prop.getProperty("ACCOUNT_NUMBER"));
-        int THREAD_NUMBER = Integer.parseInt(prop.getProperty("THREAD_NUMBER"));
-        int TRANSACTION_NUMBER = Integer.parseInt(prop.getProperty("TRANSACTION_NUMBER"));
+        int ACCOUNTS_NUMBER = Integer.parseInt(prop.getProperty("ACCOUNTS_NUMBER"));
+        int THREADS_NUMBER = Integer.parseInt(prop.getProperty("THREADS_NUMBER"));
+        int TRANSACTIONS_NUMBER = Integer.parseInt(prop.getProperty("TRANSACTIONS_NUMBER"));
+        int MAX_TRANSFER_AMOUNT = Integer.parseInt(prop.getProperty("MAX_TRANSFER_AMOUNT"));
 
         List<Account> accounts = new ArrayList<>();
-        for (int i = 0; i < ACCOUNT_NUMBER; i++) {
+        for (int i = 0; i < ACCOUNTS_NUMBER; i++) {
             accounts.add(new Account(UUID.randomUUID().toString(), INITIAL_BALANCE));
         }
 
         TransactionManager transactionManager = new TransactionManager(accounts);
-        ExecutorService executorService = Executors.newFixedThreadPool(THREAD_NUMBER);
-        CountDownLatch countDownLatch = new CountDownLatch(TRANSACTION_NUMBER);
+        ExecutorService executorService = Executors.newFixedThreadPool(THREADS_NUMBER);
+        CountDownLatch countDownLatch = new CountDownLatch(TRANSACTIONS_NUMBER);
 
-        for (int i = 0; i < THREAD_NUMBER; i++) {
-            executorService.submit(new Transaction(transactionManager, countDownLatch));
+        for (int i = 0; i < THREADS_NUMBER; i++) {
+            executorService.submit(new Transaction(transactionManager, countDownLatch, MAX_TRANSFER_AMOUNT));
         }
 
         try {
