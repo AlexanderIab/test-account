@@ -5,7 +5,7 @@ plugins {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'com.iablonski.testaccount.Main.java'
+                'Main-Class': 'com.iablonski.testaccount.Main'
         )
     }
 }
