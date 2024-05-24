@@ -1,14 +1,14 @@
 package com.iablonski.testaccount;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Transaction implements Runnable {
-    private static final Logger logger = LoggerFactory.getLogger(Transaction.class);
+    private static final Logger logger = LogManager.getLogger(Transaction.class);
     private final TransactionManager transactionManager;
     private final CountDownLatch countDownLatch;
 

@@ -1,14 +1,14 @@
 package com.iablonski.testaccount;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class TransactionManager {
-    private static final Logger logger = LoggerFactory.getLogger(TransactionManager.class);
+    private static final Logger logger = LogManager.getLogger(TransactionManager.class);
     private final List<Account> accounts;
     private final Lock lock = new ReentrantLock();
     private int transactionNumber;

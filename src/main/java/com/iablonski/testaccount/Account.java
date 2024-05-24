@@ -1,12 +1,12 @@
 package com.iablonski.testaccount;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Account {
-    private static final Logger logger = LoggerFactory.getLogger(Account.class);
+    private static final Logger logger = LogManager.getLogger(Account.class);
     private final String id;
     private final AtomicInteger money;
 
