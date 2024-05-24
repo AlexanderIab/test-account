@@ -16,7 +16,6 @@ public class Transaction implements Runnable {
     private static final int MIN_SLEEP_TIME = 1000;
     private final int maxTransferAmount;
 
-
     public Transaction(TransactionManager transactionManager, CountDownLatch countDownLatch, int maxTransferAmount) {
         this.transactionManager = transactionManager;
         this.countDownLatch = countDownLatch;
