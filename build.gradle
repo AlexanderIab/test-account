@@ -2,21 +2,30 @@ plugins {
     id 'java'
 }
 
-jar {
+// Создаем задачу для сборки "fat JAR"
+tasks.register('fatJar', Jar) {
     manifest {
-        attributes(
-                'Main-Class': 'com.iablonski.testaccount.Main'
-        )
+        attributes 'Main-Class': 'com.iablonski.testaccount.Main'
     }
+    archiveFileName = "${project.name}-all.jar"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE // Устанавливаем стратегию исключения дубликатов
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
+// Гарантируем выполнение задачи fatJar при сборке проекта
+build.dependsOn(fatJar)
+
+// Определяем основные свойства проекта
 group = 'com.iablonski.testaccount'
 version = '1.0-SNAPSHOT'
 
+// Указываем репозиторий Maven Central
 repositories {
     mavenCentral()
 }
 
+// Указываем зависимости проекта
 dependencies {
     implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
 }
