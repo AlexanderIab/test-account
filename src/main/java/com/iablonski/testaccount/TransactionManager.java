@@ -18,11 +18,11 @@ public class TransactionManager {
         this.transactionNumber = 1;
     }
 
-    // Метод для перевода средств между счетами
+    // РњРµС‚РѕРґ РґР»СЏ РїРµСЂРµРІРѕРґР° СЃСЂРµРґСЃС‚РІ РјРµР¶РґСѓ СЃС‡РµС‚Р°РјРё
     public boolean transferMoney(Account transferFrom, Account transferTo, int amount) {
         lock.lock();
         try {
-            // Сохранение изначального баланса (до транзакции) для отката изменений
+            // РЎРѕС…СЂР°РЅРµРЅРёРµ РёР·РЅР°С‡Р°Р»СЊРЅРѕРіРѕ Р±Р°Р»Р°РЅСЃР° (РґРѕ С‚СЂР°РЅР·Р°РєС†РёРё) РґР»СЏ РѕС‚РєР°С‚Р° РёР·РјРµРЅРµРЅРёР№
             int initialFromBalance = transferFrom.getMoney().get();
             int initialToBalance = transferTo.getMoney().get();
 
@@ -38,8 +38,8 @@ public class TransactionManager {
                     transactionNumber++;
                     return true;
                 } catch (Exception e){
-                    // Необязательное условие - если возникает критическая ошибка,
-                    // сумма на балансах становится изначальной (до транзакции)
+                    // РќРµРѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ СѓСЃР»РѕРІРёРµ - РµСЃР»Рё РІРѕР·РЅРёРєР°РµС‚ РєСЂРёС‚РёС‡РµСЃРєР°СЏ РѕС€РёР±РєР°,
+                    // СЃСѓРјРјР° РЅР° Р±Р°Р»Р°РЅСЃР°С… СЃС‚Р°РЅРѕРІРёС‚СЃСЏ РёР·РЅР°С‡Р°Р»СЊРЅРѕР№ (РґРѕ С‚СЂР°РЅР·Р°РєС†РёРё)
                     logger.error("Fatal error - {} during transaction from {} to {}. Rollback.",
                             e.getMessage(), transferFrom.getId(), transferTo.getId());
                     transferFrom.getMoney().set(initialFromBalance);
