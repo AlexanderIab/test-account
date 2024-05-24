@@ -20,4 +20,3 @@
 ## Использование
 
 1. Клонировать репозиторий:
-git clone https://github.com/your-username/java-multithreading-bank.git
