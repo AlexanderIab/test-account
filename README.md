@@ -16,10 +16,10 @@
 ## Собрать и запустить проект:
 
 <pre>
-./gradlew build
+./gradlew fatJar
 </pre>
 <pre>
-java -jar test-account-1.0-SNAPSHOT.jar
+java -jar build\libs\test-account-all.jar
 </pre>
 
 ## Использование
@@ -44,9 +44,9 @@ MAX_TRANSFER_AMOUNT=10000
 </pre>
 
 - Файл application.log создается в директории logs. При повторном запуске программы файл перезаписывается. 
-Для записи логов в один файл без перезаписывания, измените настройки в конфигурационном файле [logback.xml](src%2Fmain%2Fresources%2Flogback.xml)
+Для записи логов в один файл без перезаписывания, измените настройки в конфигурационном файле [log4j2.xml](src%2Fmain%2Fresources%2Flog4j2.xml)
 <pre>
-&lt;append&gt;true&lt;/append&gt;
+append="true"
 </pre>
 - Если на счету меньше денег чем сумма перевода, то данная транзакция не попадает в счетчик транзакций, 
 но выводит предупреждение в application.log
